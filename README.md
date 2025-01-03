@@ -7,3 +7,4 @@ Small Library as I learn C++ for MathVectors for me and a couple friends to use 
 - Uses std::array to store the 'data' (originally was std::vector)
 - Added Modulus overload
 - Added Scalar Division, Mutliplication, Addition, Subtraction overload
+- Added additional paramater to the template to define the size of the Vector at initialization
