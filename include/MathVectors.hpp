@@ -15,13 +15,13 @@
 namespace MathVectors
 {
 
-    template <typename T, std::size_t S>
+    template <typename T, size_t S>
     class Vector
     {
     public:
         // Constructor and Destructor
         // Default Constructor
-        Vector() : m_Data{}, m_Size(S) {};
+        Vector() : m_Data{} {};
 
         // Constructor with initializer list
         Vector(std::initializer_list<T> data)
@@ -35,8 +35,7 @@ namespace MathVectors
                 }
 
                 // Move the initializer list data into the array
-                std::copy(data.begin(), data.end(), this->m_Data.begin());
-                this->m_Size = S;
+                std::move(data.begin(), data.end(), this->m_Data.begin());
             }
             catch (std::runtime_error &e)
             {
@@ -44,48 +43,19 @@ namespace MathVectors
             }
         }
 
-        // Copy Constructor
-        Vector(const Vector<T, S> &other) = default;
-
-        // Move Constructor
-        Vector(const Vector<T, S> &&other) noexcept : m_Data(std::move(other.m_Data)), m_Size(other.m_Size) {}
-
         // Functions
-        std::size_t Size() const
+        size_t Size() const
         {
-            return m_Size;
-        }
-
-        // Debug printing
-        void Print(const char varName[])
-        {
-            std::cout << varName << ": ";
-            this->Print();
-        }
-        void Print()
-        {
-            std::cout << "(";
-            for (std::size_t i = 0; i < this->m_Size; i++)
-            {
-                if (i == this->m_Size - 1)
-                {
-                    std::cout << this->m_Data[i];
-                }
-                else
-                {
-                    std::cout << this->m_Data[i] << ", ";
-                }
-            }
-            std::cout << ")" << std::endl;
+            return S;
         }
 
         // Operator Overloads
         // Array access overload
-        T operator[](std::size_t index) const
+        T operator[](size_t index) const
         {
             return m_Data.at(index);
         }
-        T &operator[](std::size_t index)
+        T &operator[](size_t index)
         {
             return m_Data.at(index);
         }
@@ -93,7 +63,7 @@ namespace MathVectors
         friend std::ostream &operator<<(std::ostream &os, const Vector<T, S> &vec)
         {
             os << "(";
-            for (std::size_t i = 0; i < S; ++i)
+            for (size_t i = 0; i < S; ++i)
             {
                 os << vec.m_Data[i];
                 if (i < S - 1)
@@ -108,7 +78,7 @@ namespace MathVectors
         // Friend function for input stream
         friend std::istream &operator>>(std::istream &is, Vector<T, S> &vec)
         {
-            for (std::size_t i = 0; i < S; ++i)
+            for (size_t i = 0; i < S; ++i)
             {
                 is >> vec.m_Data[i];
             }
@@ -131,7 +101,7 @@ namespace MathVectors
         Vector<T, S> operator-(const Vector<T, S> &other) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 result[i] = this->m_Data[i] - other[i];
             }
@@ -141,7 +111,7 @@ namespace MathVectors
         Vector<T, S> operator-(const T &scalar) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 result[i] = this->m_Data[i] - scalar;
             }
@@ -152,7 +122,7 @@ namespace MathVectors
         Vector<T, S> operator+(const Vector<T, S> &other) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 result[i] = this->m_Data[i] + other[i];
             }
@@ -163,7 +133,7 @@ namespace MathVectors
         Vector<T, S> operator+(const T &scalar) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 result[i] = this->m_Data[i] + scalar;
             }
@@ -174,7 +144,7 @@ namespace MathVectors
         Vector<T, S> operator*(const Vector<T, S> &other) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 result[i] = this->m_Data[i] * other[i];
             }
@@ -185,7 +155,7 @@ namespace MathVectors
         Vector<T, S> operator*(const T &scalar) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 result[i] = this->m_Data[i] * scalar;
             }
@@ -196,7 +166,7 @@ namespace MathVectors
         Vector<T, S> operator/(const Vector<T, S> &other) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 if (other[i] == 0)
                 {
@@ -211,7 +181,7 @@ namespace MathVectors
         Vector<T, S> operator/(const T &scalar) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 if (scalar == 0 || scalar == 0.0)
                 {
@@ -226,7 +196,7 @@ namespace MathVectors
         Vector<T, S> operator%(const Vector<T, S> &other) const
         {
             Vector<T, S> result{};
-            for (std::size_t i = 0; i < S; i++)
+            for (size_t i = 0; i < S; i++)
             {
                 if (other[i] == 0)
                 {
@@ -240,7 +210,6 @@ namespace MathVectors
     private:
         // Private variables
         std::array<T, S> m_Data;
-        std::size_t m_Size;
     };
 }
 #endif
