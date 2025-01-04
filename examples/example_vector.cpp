@@ -19,17 +19,6 @@ int main()
     std::cout << "[Printing to the console]\n\tUsing the << operator with std::cout: ";
     std::cout << iVec2D_1 << std::endl;
 
-    // Or you can use the classes built in print function
-    std::cout << "\tUsing the Print() function: ";
-    iVec2D_1.Print();
-
-    std::cout << "\tor\n";
-    // Optionally you can add a variable name to it, it will print with the variable name
-    // EX: iVec2D_1: (4, 8)
-    std::cout << "\tPrinting with variable name using Print(varName): ";
-    iVec2D_1.Print("iVec2D_1");
-
-
     //
     // Math functions
     //
