@@ -13,3 +13,4 @@ Small Library as I learn C++ for MathVectors for me and a couple friends to use 
 - Removed Copy, Move constructors
 - Removed member variable m_Size, will now just use templates 'S' variable
 - Removed function Print(), and Print(variableName), standard << operator overload remains
+- Replaced instances of std::size_t with just size_t
